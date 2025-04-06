@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>> t;
+    while( t--)
+    {
+        int n,x;
+        cin>>n;  // n is no. of gas stations
+        cin>>x;  // x is the last distance i have to reach from 0 and back
+        
+        int arr[n];  // arr is gastations here
+        for( int i=0 ; i< n ; i++)
+        {
+            cin>>arr[i];
+        }
+        
+        int min_fuel=arr[0];
+        
+       
+        
+        for( int i =1 ; i< n ; i++)
+        {
+            int temp=arr[i]- arr[i-1];
+            min_fuel=max( min_fuel , temp );
+        }
+        
+        
+        min_fuel= max (min_fuel , (x -arr[n-1] )* 2 );
+        
+        
+        cout<<min_fuel<<endl;
+        
+    }
+}
