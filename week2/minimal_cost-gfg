@@ -1,0 +1,38 @@
+int maximumPoints(vector<vector<int>>& arr) {
+        // Code here
+        //using tabuation - botton up
+        int n= arr.size();
+        vector<vector<int>> dp ( n , vector<int>(4,0) );
+        
+        dp[0][0]= max( arr[0][2] , arr[0][1]);
+        dp[0][1]= max( arr[0][2] , arr[0][0]);
+        dp[0][2]= max( arr[0][0] , arr[0][1]);
+        dp[0][3]= max( { arr[0][2] , arr[0][1] , arr[0][0] });
+        
+        for( int days=1 ; days< arr.size() ; days++)
+        {
+            for( int last=0 ; last< 4 ; last++)
+            {
+                
+                dp[days][last]=0;
+                    
+                int maxi=0;
+                    
+                for( int task=0 ; task <3 ; task++)
+                {
+                    if( task != last)
+                    {
+                        int point= arr[days][task]+ dp[days-1][task];
+                        maxi=max( maxi , point);
+                    }
+                }
+                
+                dp[days][last]=maxi;
+            }
+        }
+        
+        return dp[n-1][3];
+        
+        
+        
+    }
